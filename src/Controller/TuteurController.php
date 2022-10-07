@@ -14,6 +14,14 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/tuteur')]
 class TuteurController extends AbstractController
 {
+    /**
+     * display all parents of students
+     * @param  \App\Repository\TuteurRepository           $tuteurRepository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @author Hamza
+     * @version 1.0
+     */
     #[Route('/', name: 'tuteur_index', methods: ['GET'])]
     public function index(TuteurRepository $tuteurRepository): Response
     {
@@ -22,6 +30,15 @@ class TuteurController extends AbstractController
         ]);
     }
 
+/**
+ * Create new parents
+ * @param  \Symfony\Component\HttpFoundation\Request  $request
+ * @param  \Doctrine\ORM\EntityManagerInterface       $entityManager
+ *
+ * @return \Symfony\Component\HttpFoundation\Response
+ * @author Hamza
+ * @version 1.0
+ */
     #[Route('/new', name: 'tuteur_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -42,6 +59,14 @@ class TuteurController extends AbstractController
         ]);
     }
 
+     /**
+     * Undocumented function
+     * @param  \App\Entity\Tuteur                         $tuteur
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @author Hamza
+     * @version 1.0
+     */
     #[Route('/{id}', name: 'tuteur_show', methods: ['GET'])]
     public function show(Tuteur $tuteur): Response
     {
