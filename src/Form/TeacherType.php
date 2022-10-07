@@ -12,8 +12,21 @@ class TeacherType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('name')
-            ->add('email')
+            ->add('name', TextType::class, [
+                        'label' => 'Name',
+                        'attr' => [
+                            'placeholder' => 'Name',
+                        ],
+                        'row_attr' => [
+                            'class' => 'form-floating',
+                        ],
+            ])
+            ->add('email', EmailType::class, [
+                'label' => '@',
+                'row_attr' => [
+                    'class' => 'input-group',
+                ],
+            ])
             ->add('telephone')
             ->add('gendre')
             ->add('specializations')
