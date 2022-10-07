@@ -14,6 +14,15 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/teacher')]
 class TeacherController extends AbstractController
 {
+
+    /**
+     * affiche tous les proffesseurs
+     * @param  \App\Repository\TeacherRepository          $teacherRepository
+     *
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @author Hamza
+     * @version 1.0
+     */
     #[Route('/', name: 'teacher_index', methods: ['GET'])]
     public function index(TeacherRepository $teacherRepository): Response
     {
@@ -22,6 +31,15 @@ class TeacherController extends AbstractController
         ]);
     }
 
+/**
+ * creer un nouveau prof
+ * @param  \Symfony\Component\HttpFoundation\Request  $request
+ * @param  \Doctrine\ORM\EntityManagerInterface       $entityManager
+ *
+ * @return \Symfony\Component\HttpFoundation\Response
+ * @author Hamza
+ * @version 1.0
+ */
     #[Route('/new', name: 'teacher_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
