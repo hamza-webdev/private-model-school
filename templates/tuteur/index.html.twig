@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tuteur index{% endblock %}
+
+{% block body %}
+    <h1>Tuteur index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name_father</th>
+                <th>Name_mather</th>
+                <th>Telephone_father</th>
+                <th>Telephone_mother</th>
+                <th>Email</th>
+                <th>Password</th>
+                <th>Adresse</th>
+                <th>City</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for tuteur in tuteurs %}
+            <tr>
+                <td>{{ tuteur.id }}</td>
+                <td>{{ tuteur.nameFather }}</td>
+                <td>{{ tuteur.nameMather }}</td>
+                <td>{{ tuteur.telephoneFather }}</td>
+                <td>{{ tuteur.telephoneMother }}</td>
+                <td>{{ tuteur.email }}</td>
+                <td>{{ tuteur.password }}</td>
+                <td>{{ tuteur.adresse }}</td>
+                <td>{{ tuteur.city }}</td>
+                <td>
+                    <a href="{{ path('tuteur_show', {'id': tuteur.id}) }}">show</a>
+                    <a href="{{ path('tuteur_edit', {'id': tuteur.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="10">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('tuteur_new') }}">Create new</a>
+{% endblock %}
