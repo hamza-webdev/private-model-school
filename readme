@@ -1,3 +1,27 @@
 # Private model school
+## install Symfony UX TWIG & LIVE COMPONENTS
+````
+composer req symfony/ux-twig-component
+composer req symfony/ux-live-component
+npm install --force && npm run build
+````
 
-maj gitlab and github
+## Configuration de Live Component modif file assets/bootstrap.js
+````
+import LiveController from '@symfony/ux-live-component';
+import '@symfony/ux-live-component/styles/live.css';
+
+app.register('live', LiveController);
+````
+* Et ajoutons quelques lighes à notre fichier config/routes.yaml
+````
+live_component:
+    resource: '@LiveComponentBundle/Resources/config/routing/live_component.xml'
+
+````
+** Fabriquer les assets -ecoute npm run watch -> npm run build
+
+### Générations de fixtures
+- composer req --dev orm-fixtures
+- composer req --dev fakerphp/faker
+- * CMD symfony console doctrine:fixture:load
