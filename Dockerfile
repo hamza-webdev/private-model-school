@@ -1,1 +1,2 @@
-FROM baseImage
+FROM nginx:alpine
+COPY ./ /usr/share/nginx/html

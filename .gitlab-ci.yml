@@ -3,7 +3,6 @@ variables:
   AWS_DEFAULT_REGION: eu-west-3
   APP_NAME: pms
   DOCKER_HOST: tcp://docker:2375
-  CI_PIPELINE_IID: 1.0.0
 
 publish:
   image:
@@ -15,10 +14,8 @@ publish:
     - amazon-linux-extras install docker
     - aws --version
     - docker --version
-    - echo $CI_REGISTRY_IMAGE${tag}
   script:
-    - docker build --pull -t "$CI_REGISTRY_IMAGE${tag}" .
+    - docker build -t $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID .
     - aws ecr get-login-password | docker login --username AWS --password-stdin $DOCKER_REGISTRY
     - docker push $DOCKER_REGISTRY/$APP_NAME:$CI_PIPELINE_IID
-
 
