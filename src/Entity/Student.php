@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use App\Repository\StudentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\StudentRepository;
 
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
 class Student
@@ -66,12 +66,12 @@ class Student
         return $this;
     }
 
-    public function getDateNaissance(): ?\DateTimeInterface
+    public function getDateNaissance(): ?\datetime
     {
         return $this->date_naissance;
     }
 
-    public function setDateNaissance(\DateTimeInterface $date_naissance): self
+    public function setDateNaissance(\datetime $date_naissance): self
     {
         $this->date_naissance = $date_naissance;
 
@@ -140,7 +140,7 @@ class Student
 
     public function __toString(): string
     {
-         return (string) $this->getName();
+         return (string) $this->getSurname();
     }
 
 }
