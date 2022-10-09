@@ -60,7 +60,7 @@ class TuteurController extends AbstractController
     }
 
      /**
-     * Undocumented function
+     *
      * @param  \App\Entity\Tuteur                         $tuteur
      *
      * @return \Symfony\Component\HttpFoundation\Response
