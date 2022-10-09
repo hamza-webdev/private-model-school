@@ -19,7 +19,6 @@ class StudentType extends AbstractType
             ->add('name', TextType::class)
             ->add('surname', TextType::class)
             ->add('date_naissance', DateTimeType::class)
-            ->add('date_inscrit', DateTimeType::class)
             ->add('photo', TextType::class)
             ->add('sexe', TextType::class)
             ->add('info_perso', TextareaType::class)
