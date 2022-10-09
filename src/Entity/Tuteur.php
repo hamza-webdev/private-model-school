@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: TuteurRepository::class)]
 class Tuteur
 {
@@ -16,35 +18,52 @@ class Tuteur
     private $id;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     private $name_father;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $name_mather;
 
     #[ORM\Column(type: 'string', length: 255)]
+     #[Assert\NotBlank]
     private $telephone_father;
 
     #[ORM\Column(type: 'string', length: 255, nullable: true)]
     private $telephone_mother;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     private $email;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $password;
 
     #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank]
     private $adresse;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $city;
 
-    #[ORM\OneToMany(mappedBy: 'tuteur', targetEntity: Student::class)]
-    private $students;
+    // #[ORM\OneToMany(mappedBy: 'tuteur', targetEntity: Student::class)]
+    /**
+     * @var Collection<int, Student>
+     * @ORM\OneToMany(targetEntity=Student::class, mappedBy="tuteur", orphanRemoval=true, cascade={"persist"})
+     */
+    #[Assert\Count(min:1)]
+    private Collection $students;
+
+    // #[ORM\OneToMany(mappedBy: 'tuteur', targetEntity: Eleve::class)]
+    /**
+     * @var Collection<int, Eleve>
+     * @ORM\OneToMany(targetEntity=Eleve::class, mappedBy="tuteur", orphanRemoval=true, cascade={"persist"})
+     */
+    private $eleves;
 
     public function __construct()
     {
         $this->students = new ArrayCollection();
+        $this->eleves = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -148,9 +167,7 @@ class Tuteur
         return $this;
     }
 
-    /**
-     * @return Collection|Student[]
-     */
+
     public function getStudents(): Collection
     {
         return $this->students;
@@ -159,7 +176,7 @@ class Tuteur
     public function addStudent(Student $student): self
     {
         if (!$this->students->contains($student)) {
-            $this->students[] = $student;
+            $this->students->add($student);
             $student->setTuteur($this);
         }
 
@@ -181,6 +198,36 @@ class Tuteur
     public function __toString(): string
     {
          return (string) $this->getEmail();
+    }
+
+    /**
+     * @return Collection|Eleve[]
+     */
+    public function getEleves(): Collection
+    {
+        return $this->eleves;
+    }
+
+    public function addEleve(Eleve $eleve): self
+    {
+        if (!$this->eleves->contains($eleve)) {
+            $this->eleves->add($eleve) ;
+            $eleve->setTuteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEleve(Eleve $eleve): self
+    {
+        if ($this->eleves->removeElement($eleve)) {
+            // set the owning side to null (unless already changed)
+            if ($eleve->getTuteur() === $this) {
+                $eleve->setTuteur(null);
+            }
+        }
+
+        return $this;
     }
 
 }
