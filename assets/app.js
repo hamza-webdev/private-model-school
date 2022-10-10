@@ -36,7 +36,7 @@ const newItem = (e) => {
 console.log("collectionHolder===", collectionHolder.dataset.prototype);
 
   const item = document.createElement("div");
-  item.classList.add("col-10");
+  item.classList.add("col-4");
   let indexStudent = parseInt(collectionHolder.dataset.index);
   console.log("indexStudent===", typeof indexStudent);
   console.log("collection index===",typeof collectionHolder.dataset.index);
@@ -59,7 +59,7 @@ console.log("collectionHolder===", collectionHolder.dataset.prototype);
 
 document
   .querySelectorAll('.btn-remove')
-  .forEach(btn => btn.addEventListener("click", (e) => e.currentTarget.closest(".col-10").remove()));
+  .forEach(btn => btn.addEventListener("click", (e) => e.currentTarget.closest(".col-4").remove()));
 
 document
   .querySelectorAll('.btn-new')

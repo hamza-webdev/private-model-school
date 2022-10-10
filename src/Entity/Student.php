@@ -7,6 +7,8 @@ use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\StudentRepository;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
 #[ORM\HasLifecycleCallbacks]
 class Student
@@ -38,7 +40,8 @@ class Student
     private $info_perso;
 
     #[ORM\ManyToOne(targetEntity: Tuteur::class, inversedBy: 'students')]
-    private $tuteur;
+    #[ORM\JoinColumn(onDelete:"CASCADE")]
+    private ?Tuteur $tuteur;
 
     public function __construct()
     {

@@ -35,6 +35,7 @@ class TuteurType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'attr' => ['class' => 'fieldset-student'],
+                'error_bubbling' => false
 
                 ])
         ;

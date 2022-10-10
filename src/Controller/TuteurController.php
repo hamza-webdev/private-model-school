@@ -50,12 +50,13 @@ class TuteurController extends AbstractController
 // dd($tuteur);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $students = $tuteur->getStudents();
-            foreach($students as $student){
-            $student->setDateInscrit(new Date());
-            $entityManager->persist($student);
+            // $students = $tuteur->getStudents();
+            // foreach($students as $student){
 
-            }
+            // $entityManager->persist($student);
+
+            // }
+
             $entityManager->persist($tuteur);
             $entityManager->flush();
 

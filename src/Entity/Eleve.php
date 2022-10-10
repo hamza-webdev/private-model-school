@@ -5,6 +5,8 @@ namespace App\Entity;
 use App\Repository\EleveRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: EleveRepository::class)]
 class Eleve
 {
@@ -29,7 +31,8 @@ class Eleve
     private $infoPerso;
 
     #[ORM\ManyToOne(targetEntity: Tuteur::class, inversedBy: 'eleves')]
-    private $tuteur;
+    #[ORM\JoinColumn(onDelete:"CASCADE")]
+    private ?Tuteur $tuteur;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
     private $dateInscriptionAt;
