@@ -45,12 +45,16 @@ class Tuteur
     #[ORM\Column(type: 'string', length: 255)]
     private $city;
 
-    // #[ORM\OneToMany(mappedBy: 'tuteur', targetEntity: Student::class)]
+    // #[ORM\OneToMany(mappedBy: 'tuteur', targetEntity: Student::class, cascade:"persist")]
+    // #[Assert\Count(min:1)]
+    // #[Assert\Valid]
     /**
-     * @var Collection<int, Student>
-     * @ORM\OneToMany(targetEntity=Student::class, mappedBy="tuteur", orphanRemoval=true, cascade={"persist"})
+     * Undocumented variable
+     * @var Collection<int, student>
+     * @ORM\OneToMany(targetEntity=student::class, mappedBy="tuteur", orphanRemoval=true, cascade={"persist"})
+     * @author Hamza
+     * @version 1.0
      */
-    #[Assert\Count(min:1)]
     private Collection $students;
 
     // #[ORM\OneToMany(mappedBy: 'tuteur', targetEntity: Eleve::class)]

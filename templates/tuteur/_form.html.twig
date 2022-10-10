@@ -1,5 +1,7 @@
 {{ form_start(form) }}
-    {{ form_widget(form._token) }}
+
+    {{ form_errors(form.students)}}
+
     {{ form_row(form.name_father)}}
     {{ form_row(form.name_mather)}}
     {{ form_row(form.telephone_father)}}
@@ -12,21 +14,22 @@
     <button:button class="btn btn-primary btn-new"
         id="new-student"
         data-collection=#students
-
         >New Student</button:button>
 
     <div id="students" class="row"
-        data-prototype="{{ include("tuteur/_student.html.twig", {form: form.students.vars.prototype} ) |e("html_attr")}}"
-        data-index="{{form.students|length > 0 ? form.students|last.vars.name +1 : 0 }} ">
-    {% for student in form.students  %}
-        {{ include("tuteur/_student.html.twig", {form: student} )}}
+        data-prototype="{{ include("tuteur/_student.html.twig", {form: form.students.vars.prototype})|e("html_attr")}}"
+        data-index="{{form.students|length > 0 ? form.students|last.vars.name +1 : 0}} ">
 
-    {% endfor %}
+        {% for student in form.students  %}
+        <div class="col-4">
+            {{ include("tuteur/_student.html.twig", {form: student} )}}
+        </div>
+        {% endfor %}
 
     </div>
 
   {# <button type="button" class="btn btn-primary" id="new-student">Ajouter Enfant (student)</button> #}
 
 
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form, {render_rest:false}) }}
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+{{ form_end(form)}}

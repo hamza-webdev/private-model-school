@@ -33,26 +33,33 @@ import './bootstrap';
 const newItem = (e) => {
   const collectionHolder = document.querySelector(e.currentTarget.dataset.collection);
 
+console.log("collectionHolder===", collectionHolder.dataset.prototype);
+
   const item = document.createElement("div");
-  item.classList.add("col-10");
+  item.classList.add("col-4");
+  let indexStudent = parseInt(collectionHolder.dataset.index);
+  console.log("indexStudent===", typeof indexStudent);
+  console.log("collection index===",typeof collectionHolder.dataset.index);
+
   item.innerHTML = collectionHolder
     .dataset
     .prototype
     .replace(
       /__name__/g,
-      collectionHolder.dataset.index
+      indexStudent
     );
 
   item.querySelector(".btn-remove").addEventListener("click", () => item.remove());
 
   collectionHolder.appendChild(item);
 
-  collectionHolder.dataset.index++;
+  collectionHolder.dataset.index = parseInt(indexStudent+ 1) ;
 };
+
 
 document
   .querySelectorAll('.btn-remove')
-  .forEach(btn => btn.addEventListener("click", (e) => e.currentTarget.closest(".col-10").remove()));
+  .forEach(btn => btn.addEventListener("click", (e) => e.currentTarget.closest(".col-4").remove()));
 
 document
   .querySelectorAll('.btn-new')

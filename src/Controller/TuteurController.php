@@ -6,10 +6,12 @@ use App\Entity\Tuteur;
 use App\Form\TuteurType;
 use App\Repository\TuteurRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/tuteur')]
 class TuteurController extends AbstractController
@@ -47,6 +49,14 @@ class TuteurController extends AbstractController
         $form->handleRequest($request);
 // dd($tuteur);
         if ($form->isSubmitted() && $form->isValid()) {
+
+            // $students = $tuteur->getStudents();
+            // foreach($students as $student){
+
+            // $entityManager->persist($student);
+
+            // }
+
             $entityManager->persist($tuteur);
             $entityManager->flush();
 

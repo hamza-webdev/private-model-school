@@ -2,10 +2,15 @@
 
 namespace App\Entity;
 
+use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\StudentRepository;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: StudentRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Student
 {
     #[ORM\Id]
@@ -19,7 +24,7 @@ class Student
     #[ORM\Column(type: 'string', length: 255)]
     private $surname;
 
-    #[ORM\Column(type: 'datetime')]
+    #[ORM\Column(type: 'datetime', nullable: true)]
     private $date_naissance;
 
     #[ORM\Column(type: 'datetime', nullable: true)]
@@ -35,8 +40,13 @@ class Student
     private $info_perso;
 
     #[ORM\ManyToOne(targetEntity: Tuteur::class, inversedBy: 'students')]
-    private $tuteur;
+    #[ORM\JoinColumn(onDelete:"CASCADE")]
+    private ?Tuteur $tuteur;
 
+    public function __construct()
+    {
+        $this->setDateInscrit = new DateTime("Now");
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -78,12 +88,20 @@ class Student
         return $this;
     }
 
-    public function getDateInscrit(): ?\DateTimeInterface
+    public function getDateInscrit(): ?\datetime
     {
         return $this->date_inscrit;
     }
 
-    public function setDateInscrit(\DateTimeInterface $date_inscrit): self
+/**
+ * Undocumented function
+ * @param  \datetime|null $date_inscrit
+ *
+ * @return self
+ * @author Hamza
+ * @version 1.0
+ */
+    public function setDateInscrit(?\datetime $date_inscrit): self
     {
         $this->date_inscrit = $date_inscrit;
 
