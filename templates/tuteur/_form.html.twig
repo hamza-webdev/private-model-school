@@ -1,5 +1,5 @@
 {{ form_start(form) }}
-    {{ form_widget(form._token) }}
+
     {{ form_row(form.name_father)}}
     {{ form_row(form.name_mather)}}
     {{ form_row(form.telephone_father)}}
@@ -16,8 +16,8 @@
         >New Student</button:button>
 
     <div id="students" class="row"
-        data-prototype="{{ include("tuteur/_student.html.twig", {form: form.students.vars.prototype} ) |e("html_attr")}}"
-        data-index="{{form.students|length > 0 ? form.students|last.vars.name +1 : 0 }} ">
+        data-prototype="{{ include("tuteur/_student.html.twig", {form: form.students.vars.prototype})|e("html_attr")}}"
+        data-index="{{form.students|length > 0 ? form.students|last.vars.name +1 : 0}} ">
     {% for student in form.students  %}
         {{ include("tuteur/_student.html.twig", {form: student} )}}
 
@@ -29,4 +29,4 @@
 
 
     <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form, {render_rest:false}) }}
+{{ form_end(form)}}
